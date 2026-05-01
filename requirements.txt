@@ -4,4 +4,6 @@ pillow
 python-multipart
 numpy
 gdown
-tensorflow-cpu
+keras
+h5py
+tf-keras
