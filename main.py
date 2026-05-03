@@ -11,8 +11,7 @@ app = FastAPI()
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
 if not os.path.exists("silk_model_final.h5"):
-    gdown.download("https://drive.google.com/uc?id=YOUR_FILE_ID", "silk_model_final.h5", quiet=False)
-
+    gdown.download(""https://drive.google.com/uc?id=1LCSaByu7d3fObgRZBKc9l60LHVIawAX2", "silk_model_final.h5", quiet=False)
 import keras
 model = keras.models.load_model("silk_model_final.h5")
 
