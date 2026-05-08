@@ -10,10 +10,16 @@ import gdown
 app = FastAPI()
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
-if not os.path.exists("silk_model_final.h5"):
-    gdown.download(""https://drive.google.com/uc?id=1LCSaByu7d3fObgRZBKc9l60LHVIawAX2", "silk_model_final.h5", quiet=False)
+MODEL_PATH = "silk_model_best.keras"
+FILE_ID = "1ttX-9ANxR-Isw04Tu62SYNQFKAux-It_"
+
+if not os.path.exists(MODEL_PATH):
+    print("Downloading model...")
+    gdown.download(f"https://drive.google.com/uc?id={FILE_ID}", MODEL_PATH, quiet=False)
+
 import keras
-model = keras.models.load_model("silk_model_final.h5")
+model = keras.models.load_model(MODEL_PATH)
+print("Model loaded!")
 
 def preprocess(image):
     image = image.resize((224, 224))
@@ -53,7 +59,7 @@ async def detect(file: UploadFile = File(...)):
             "fake_prob": fake_prob,
             "badge": badge,
             "silk_type": "Mekhela Chador",
-            "source": "ResNet-50 (Keras)",
+            "source": "ResNet-50 (90.95%)",
             "observations": obs,
             "reason": reason
         })
